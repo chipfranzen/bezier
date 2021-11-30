@@ -1,4 +1,5 @@
 use eframe::{egui, epi};
+use std::f32::consts::TAU;
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
 #[cfg_attr(feature = "persistence", derive(serde::Deserialize, serde::Serialize))]
@@ -104,6 +105,19 @@ impl epi::App for TemplateApp {
                 "Source code."
             ));
             egui::warn_if_debug_build(ui);
+
+            let size = egui::Vec2::splat(256.0);
+            let (response, painter) = ui.allocate_painter(size, egui::Sense::hover());
+            let rect = response.rect;
+            let c = rect.center();
+            let r = rect.width() / 3.0;
+            let color = egui::Color32::from_gray(255);
+            let stroke = egui::Stroke::new(5.0, color);
+            painter.circle_stroke(c, r, stroke);
+            painter.line_segment([c - egui::vec2(0.0, r), c + egui::vec2(0.0, r)], stroke);
+            painter.line_segment([c, c + r * egui::Vec2::angled(TAU * 1.0 / 8.0)], stroke);
+            painter.line_segment([c, c + r * egui::Vec2::angled(TAU * 3.0 / 8.0)], stroke);
+            // ui.add(painter);
         });
 
         if false {
