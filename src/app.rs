@@ -1,6 +1,5 @@
 mod bezier;
 use eframe::{egui, epi};
-use std::f32::consts::TAU;
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
 #[cfg_attr(feature = "persistence", derive(serde::Deserialize, serde::Serialize))]
@@ -62,6 +61,6 @@ impl epi::App for BezierApp {
             });
         });
 
-        self.bezier_demo.ui(ctx);
+        bezier_demo.ui(ctx);
     }
 }

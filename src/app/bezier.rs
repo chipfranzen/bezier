@@ -39,7 +39,6 @@ impl BezierDemo {
     }
 
     pub fn ui(&mut self, ctx: &egui::CtxRef) {
-        let Self { animate } = self;
         egui::CentralPanel::default().show(ctx, |ui| {
             // The central panel the region left after adding TopPanel's and SidePanel's
 
@@ -52,6 +51,7 @@ impl BezierDemo {
             egui::warn_if_debug_build(ui);
 
             self.options_ui(ui);
+
             if self.animate {
                 ui.ctx().request_repaint();
             };
