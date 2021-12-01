@@ -1,6 +1,8 @@
 use eframe::egui;
 use std::f32::consts::TAU;
 
+#[cfg_attr(feature = "persistence", derive(serde::Deserialize, serde::Serialize))]
+#[cfg_attr(feature = "persistence", serde(default))]
 pub struct BezierDemo {
     animate: bool,
 }
